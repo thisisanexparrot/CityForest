@@ -17,8 +17,8 @@ class DNA {
   boolean stoppedZ;
 
 
-  DNA(int w, int h, int d) {
-  
+  DNA(ExtrudeShape e_, int w, int h, int d) {
+    e = e_;
   }
   
   DNA(DNA d) {

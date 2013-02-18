@@ -9,7 +9,7 @@ class ExtrudeShape {
     
   //Add vertices in order of connection 
   void addVertex(int x, int y) {
-    Vertex v = new Vertex(x, y, 0);
+    Vertex v = new Vertex(x, 0, y);
     vertices2D.add(v);
   }
   
@@ -25,14 +25,14 @@ class ExtrudeShape {
     strokeWeight(w); 
   }
   
-  void extrudeShape(int theHeight) {
+  void extrudeDraw(int theHeight) {
     stroke(255);
     fill(c);
     ArrayList<Vertex> v3D = new ArrayList<Vertex>();
   
     for (int i = 0; i < vertices2D.size(); i++) {
       Vertex v0 = vertices2D.get(i);
-      Vertex v1 = new Vertex(v0.x, v0.y, theHeight);
+      Vertex v1 = new Vertex(v0.x, theHeight, v0.z);
       v3D.add(v1);
     }
   

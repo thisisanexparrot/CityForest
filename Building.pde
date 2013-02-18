@@ -26,29 +26,39 @@ class Building {
     w = w_;
     h = h_;
     d = d_;
+
+    if(col) {
+      c = color(#3648D6); 
+    }
+    else {
+      c = color(#3648D6); 
+    }
+
     
-    dna = new DNA(3, 4, 5);    
+    ExtrudeShape e = new ExtrudeShape(c);
+    e.addVertex(0, 0);
+    e.addVertex(50, 0);
+    e.addVertex(50, 50);
+    e.addVertex(0, 50);
+    
+    dna = new DNA(e, 3, 4, 5);    
     
     maxWidth = 800;
     maxHeight = 800;
     maxDepth = 800;
     deathChance = 0;
     naturalLifeSpan = nls;
-    if(col) {
-      c = color(#1522D6); 
-    }
-    else {
-      c = color(#1522D6); 
-    }
   }
 
   void update() {
     pushMatrix();
-    translate(location.x+w, location.y+20, location.z+d);
+    translate(location.x, location.y, location.z);
     fill(c);
     strokeWeight(8);
     stroke(255);
-    box(w, h, d);
+    
+    dna.e.extrudeDraw(h);
+    //box(w, h, d);
     if (!dying) {
       growUp();
       //growOutX();
