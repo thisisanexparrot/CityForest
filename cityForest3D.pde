@@ -44,7 +44,7 @@ void draw() {
   translate(0, height, 0);
   noStroke();
   fill(blue);
-  //box(groundX, 20, groundY);
+  box(groundX, 20, groundY);
   popMatrix();
 
   //fill(255);

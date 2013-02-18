@@ -4,7 +4,7 @@ class Building {
   int h;
   int d;
   int maxWidth;
-  int maxHeight;
+  int heightCap;
   int maxDepth;
 
   int naturalLifeSpan;
@@ -44,7 +44,7 @@ class Building {
     dna = new DNA(e, 3, 4, 5);    
     
     maxWidth = 800;
-    maxHeight = 800;
+    heightCap = 800;
     maxDepth = 800;
     deathChance = 0;
     naturalLifeSpan = nls;
@@ -77,8 +77,8 @@ class Building {
   }
 
   void growUp() {
-    if (h <= maxHeight && !stoppedY) {
-      h+=2;
+    if (abs(h) <= heightCap && !stoppedY) {
+      h-=2;
     }
   }
 
@@ -97,11 +97,11 @@ class Building {
 
   void die() {
     dying = true;
-    if(h <= 0) {
+    if(h >= 0) {
       dead = true; 
     }
     else {
-      h--; 
+      h++; 
     }
   }
   
