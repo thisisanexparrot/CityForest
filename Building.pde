@@ -1,5 +1,8 @@
 class Building {
   PVector location;
+  ExtrudeShape baseShape;
+  DNA dna;
+  
   int w;
   int h;
   int d;
@@ -14,12 +17,17 @@ class Building {
   boolean dead;
 
   float fitness;
-  DNA dna;
   color c;
 
   boolean stoppedX;
   boolean stoppedY;
   boolean stoppedZ;
+
+  Building(PVector location_, DNA dna_, int nls) {
+    location = location_; 
+    dna = dna_;
+    naturalLifeSpan = nls;
+  }
 
   Building(PVector location_, int w_, int h_, int d_, int nls, boolean col) {
     location = location_;
@@ -33,6 +41,8 @@ class Building {
     else {
       c = color(#3648D6); 
     }
+    
+    
 
     
     ExtrudeShape e = new ExtrudeShape(c);
@@ -41,7 +51,7 @@ class Building {
     e.addVertex(50, 50);
     e.addVertex(0, 50);
     
-    dna = new DNA(e, 3, 4, 5);    
+    dna = new DNA(e);//, 3, 4, 5);    
     
     maxWidth = 800;
     heightCap = 800;

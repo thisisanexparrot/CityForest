@@ -5,11 +5,26 @@ int groundX;
 int groundY;
 color blue;
 
+Population population; 
+int initPopulation = 300;
+float mutationRate = 0.05;
+
+int breedingAge;
+int breedingFreq; 
+
 void setup() {
+  //smooth();
   size(850, 850, P3D);
   groundX = 5000;
   groundY = 5000;
-  blue = color(#3648D6);
+  blue = color(#3648D6); 
+  
+  breedingAge = 40;
+  breedingFreq = 10;
+
+  population = new Population(mutationRate, initPopulation, blue);
+
+
 
   buildings = new ArrayList<Building>();
 
@@ -18,8 +33,7 @@ void setup() {
 
   PVector v1 = new PVector(100, height-20, 50);
   Building b1 = new Building(v1, 100, 40, 80, 300, false);
-
-
+  
   buildings.add(b);
   buildings.add(b1);
 }
