@@ -20,21 +20,10 @@ class Building {
   boolean stoppedY;
   boolean stoppedZ;
 
-  Building(DNA dna_, 
-           int nls, 
-           int growthRate_, 
-           int heightCap_) { //PVector location_, 
+  Building(DNA dna_) { //PVector location_, 
     //location = location_; 
     dna = dna_;
-    naturalLifeSpan = nls;
-    if(growthRate >= 0) {
-      growthRate = float(growthRate_);
-    }
-    else {
-      growthRate = 1/growthRate;
-    }
-    
-    heightCap = heightCap_;
+    //naturalLifeSpan = nls;
   }
   
   void run(ArrayList<Building> buildings) {
@@ -76,13 +65,13 @@ class Building {
   }
 
   void growUp() {
-    if (abs(h) <= heightCap && !stoppedY) {
-      h -= growthRate;
+    if (abs(h) <= dna.heightCap && !stoppedY) {
+      h -= dna.growthRate;
     }
   }
 
   void isDying() {
-    if (numberYears > naturalLifeSpan) {
+    if (numberYears > dna.naturalLifeSpan) {
       float deathThreshold = random(100);
       if (deathChance > deathThreshold) {
         dying = true;

@@ -61,9 +61,10 @@ class Population {
                         location,
                         seedSpread,
                         nls,
-                        growthRate);
+                        growthRate, 
+                        heightCap);
 
-      Building b = new Building(dna, nls, growthRate, heightCap);
+      Building b = new Building(dna);
       buildings.add(b);
     }
   }
@@ -119,8 +120,8 @@ class Population {
       DNA child = momgenes.crossover(dadgenes);
       child.mutate(mutationRate);
       //PVector location = new PVector(start.r.x+start.r.width/2,start.r.y+start.r.height/2);
-      //buildings[i] = new Building(child);
-      
+      Building newB = new Building(child);
+      buildings.add(newB);
     }
     generations++;
   }

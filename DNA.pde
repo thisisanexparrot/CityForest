@@ -4,10 +4,10 @@ class DNA {
   ExtrudeShape e;
   PVector location;
   //DNA dna;
-  int naturalLifeSpan;
   int seedSpread;
-  int naturalLifeCycle;
-  int growthRate;
+  int naturalLifeSpan;
+  float growthRate;
+  int heightCap;
 
   int maxHeight, maxWidth, maxDepth;
 
@@ -20,12 +20,20 @@ class DNA {
       PVector location_,
       int seedSpread_,
       int nls_,
-      int growthRate_) {//, int w, int h, int d) {
+      float growthRate_,
+      int heightCap_) {//, int w, int h, int d) {
     e = e_;
     location = location_;
     seedSpread = seedSpread_;
-    naturalLifeCycle = nls_;
-    growthRate = growthRate_;
+    naturalLifeSpan = nls_;
+    heightCap = heightCap_;
+    
+    if(growthRate_ >= 0) {
+      growthRate = growthRate_;
+    }
+    else {
+      growthRate = 1/growthRate_;
+    }
   }
   
   DNA(DNA d) {
@@ -43,8 +51,9 @@ class DNA {
     DNA newDNA = new DNA(partner.e,
                          newLoc,
                          partner.seedSpread,
-                         partner.naturalLifeCycle,
-                         partner.growthRate);
+                         partner.naturalLifeSpan,
+                         partner.growthRate,
+                         partner.heightCap);
     return newDNA; 
   }
   
