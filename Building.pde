@@ -2,6 +2,7 @@ class Building {
   PVector location;
   ExtrudeShape baseShape;
   DNA dna;
+  float growthRate;
   
   int w;
   int h;
@@ -23,12 +24,18 @@ class Building {
   boolean stoppedY;
   boolean stoppedZ;
 
-  Building(PVector location_, DNA dna_, int nls) {
+  Building(PVector location_, DNA dna_, int nls, int growthRate_, int heightCap_) {
     location = location_; 
     dna = dna_;
     naturalLifeSpan = nls;
+    if(growthRate >= 0) {
+      growthRate = float(growthRate_);
+    }
+    else {
+      growthRate = 1/growthRate;
+    }
     
-    heightCap = 800;
+    heightCap = heightCap_;
   }
 /*
   Building(PVector location_, int w_, int h_, int d_, int nls, boolean col) {
@@ -90,7 +97,7 @@ class Building {
 
   void growUp() {
     if (abs(h) <= heightCap && !stoppedY) {
-      h-=2;
+      h -= growthRate;
     }
   }
 
