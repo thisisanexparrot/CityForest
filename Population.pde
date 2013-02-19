@@ -94,11 +94,10 @@ class Population {
   }
 
   void naturalSelection() {
-    println("select");
     darwin.clear();
 
     float totalFitness = getTotalFitness();
-
+    
     for (int i = 0; i < buildings.size(); i++) {
       float fitnessNormal = buildings.get(i).fitness / totalFitness;
       int n = (int) (fitnessNormal * 50000);  // Arbitrary multiplier, consider mapping fix
@@ -109,7 +108,8 @@ class Population {
   }
 
   void generate() {
-    for (int i = 0; i < buildings.size(); i++) {
+    int newGen = int(random(0, 20));
+    for (int i = 0; i < newGen; i++) {
       int m = int(random(darwin.size()));
       int d = int(random(darwin.size()));
       Building mom = darwin.get(m);

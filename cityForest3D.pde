@@ -20,8 +20,8 @@ void setup() {
   groundY = 5000;
   blue = color(#3648D6); 
   
-  breedingAge = 40;
-  breedingFreq = 10;
+  breedingAge = 80;
+  breedingFreq = 40;
   numBreedingYears = 0;
 
   population = new Population(mutationRate, 

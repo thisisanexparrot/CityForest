@@ -42,7 +42,6 @@ class DNA {
   
   DNA crossover(DNA partner) {
     //ExtrudeShape eNew = new ExtrudeShape(c);
-    println("crossing");
     float newX = location.x + random(-100, 100);
     float newZ = location.z + random(-100, 100);
     
