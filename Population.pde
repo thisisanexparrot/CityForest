@@ -9,13 +9,24 @@ class Population {
   int zConstrain;
   int spread; 
 
+  int breedingAge;
+  int breedingFreq;
+
   int order;
   color c1;
 
-  Population(float m, int num, color c1_, int xConstrain_, int zConstrain_) {
+  Population(float m, 
+             int num, 
+             color c1_, 
+             int xConstrain_, 
+             int zConstrain_, 
+             int breedingAge_, 
+             int breedingFreq_) {
     c1 = c1_;
     xConstrain = xConstrain_;
     zConstrain = zConstrain_;
+    breedingAge = breedingAge_;
+    breedingFreq = breedingFreq;
     spread = 700;
 
     mutationRate = m;
@@ -26,11 +37,13 @@ class Population {
     for (int i = 0; i < num; i++) {
       int beginX = int(random(-spread, spread));
       int beginZ = int(random(-spread, spread));
-      println(beginX + ", " + beginZ);
       PVector location = new PVector(beginX, height-20, beginZ);
 
+
+
       ExtrudeShape e = new ExtrudeShape(c1);
-      DNA dna = new DNA(e);
+
+
       int numVertex = 4;
       int random1 = int(random(30, 100));
       int random2 = int(random(30, 100));
@@ -42,27 +55,45 @@ class Population {
       int nls = int(random(30, 200));
       int growthRate = int(random(-2, 7));
       int heightCap = int(random(400, 700));
+      int seedSpread = int(random(500, 800));
 
-      Building b = new Building(location, dna, nls, growthRate, heightCap);
+      DNA dna = new DNA(e, 
+                        location,
+                        seedSpread,
+                        nls,
+                        growthRate);
+
+      Building b = new Building(dna, nls, growthRate, heightCap);
       buildings.add(b);
     }
   }
 
   void live() {
-    for (int i = 0; i < buildings.size(); i++) {
-
-      //buildings[i].run();
+    for (Building b: buildings) {
+      b.isColliding(buildings);
+      b.run(buildings);
+      //b.breed();
     }
+    for (int i = 0; i < buildings.size(); i++) {
+      if (buildings.get(i).dead) {
+        buildings.remove(i);
+      }
+    }
+  }
+  
+  void breed() {
+   
   }
 
   void calcFitness() {
     for (int i = 0; i < buildings.size(); i++) {
-      //buildings[i].calcFitness();
+      buildings.get(i).calcFitness();
     }
     order = 1;
   }
 
   void naturalSelection() {
+    println("select");
     darwin.clear();
 
     float totalFitness = getTotalFitness();
@@ -85,10 +116,11 @@ class Population {
 
       DNA momgenes = mom.dna;
       DNA dadgenes = dad.dna;
-      //DNA child = momgenes.crossover(dadgenes);
-      //child.mutate(mutationRate);
+      DNA child = momgenes.crossover(dadgenes);
+      child.mutate(mutationRate);
       //PVector location = new PVector(start.r.x+start.r.width/2,start.r.y+start.r.height/2);
-      //buildings[i] = new Building(location, child);
+      //buildings[i] = new Building(child);
+      
     }
     generations++;
   }

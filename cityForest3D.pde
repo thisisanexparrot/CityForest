@@ -11,6 +11,7 @@ float mutationRate = 0.05;
 
 int breedingAge;
 int breedingFreq; 
+int numBreedingYears;
 
 void setup() {
   //smooth();
@@ -21,11 +22,30 @@ void setup() {
   
   breedingAge = 40;
   breedingFreq = 10;
+  numBreedingYears = 0;
 
-  population = new Population(mutationRate, initPopulation, blue, groundX, groundY);
+  population = new Population(mutationRate, 
+                              initPopulation, 
+                              blue, 
+                              groundX, 
+                              groundY,
+                              breedingAge,
+                              breedingFreq);
 }
 
 void draw() {
+  backgroundAndCamera();
+  population.live();
+  if(numBreedingYears > breedingFreq) {
+    population.calcFitness();
+    population.naturalSelection();
+    population.generate();
+    numBreedingYears = 0;
+  }
+  numBreedingYears++;
+}
+
+void backgroundAndCamera() {
   background(#A6A6A6);
 
   float orbitRadius= 4000+50;
@@ -46,16 +66,5 @@ void draw() {
   noStroke();
   fill(blue);
   box(groundX, 20, groundY);
-  popMatrix();
-
-  for (Building b: population.buildings) {
-    b.isColliding(population.buildings);
-    b.run(population.buildings);
-  }
-  for (int i = 0; i < population.buildings.size(); i++) {
-    if (population.buildings.get(i).dead) {
-      population.buildings.remove(i);
-    }
-  }
+  popMatrix();  
 }
-

@@ -1,15 +1,11 @@
 class Building {
-  PVector location;
+  //PVector location;
   ExtrudeShape baseShape;
   DNA dna;
   float growthRate;
   
-  int w;
-  int h;
-  int d;
-  int maxWidth;
-  int heightCap;
-  int maxDepth;
+  int w, h, d;
+  int heightCap, maxWidth, maxDepth;
 
   int naturalLifeSpan;
   int numberYears;
@@ -24,8 +20,11 @@ class Building {
   boolean stoppedY;
   boolean stoppedZ;
 
-  Building(PVector location_, DNA dna_, int nls, int growthRate_, int heightCap_) {
-    location = location_; 
+  Building(DNA dna_, 
+           int nls, 
+           int growthRate_, 
+           int heightCap_) { //PVector location_, 
+    //location = location_; 
     dna = dna_;
     naturalLifeSpan = nls;
     if(growthRate >= 0) {
@@ -37,62 +36,43 @@ class Building {
     
     heightCap = heightCap_;
   }
-/*
-  Building(PVector location_, int w_, int h_, int d_, int nls, boolean col) {
-    location = location_;
-    w = w_;
-    h = h_;
-    d = d_;
-
-    if(col) {
-      c = color(#3648D6); 
-    }
-    else {
-      c = color(#3648D6); 
-    }
-    
-   
-    
-    ExtrudeShape e = new ExtrudeShape(c);
-    e.addVertex(0, 0);
-    e.addVertex(50, 0);
-    e.addVertex(50, 50);
-    e.addVertex(0, 50);
-    
-    dna = new DNA(e);//, 3, 4, 5);    
-    
-    maxWidth = 800;
-    heightCap = 800;
-    maxDepth = 800;
-    deathChance = 0;
-    naturalLifeSpan = nls;
-  }
-  */
-
-  void update() {
+  
+  void run(ArrayList<Building> buildings) {
     pushMatrix();
-    translate(location.x, location.y, location.z);
+    display();
+    update();
+    popMatrix();
+  }
+  
+  void display() {
+    translate(dna.location.x, dna.location.y, dna.location.z);
     fill(c);
     strokeWeight(8);
     stroke(255);
-    
+  }
+  
+  void update() {
     dna.e.extrudeDraw(h);
-    //box(w, h, d);
     if (!dying) {
       growUp();
-      //growOutX();
-      //growOutZ();
       isDying();
     }
     else {
       die();
     }
-    popMatrix();
+  }
+  
+  boolean canBreed(int breedingAge) {
+    if(!dying && numberYears > breedingAge) {
+      return true;
+    }
+    return false;
   }
 
-  void run(ArrayList<Building> buildings) {
-    // display();
-    update();
+  
+  void calcFitness() {
+    fitness = random(0, 20);
+    //calculate from  
   }
 
   void growUp() {
@@ -141,7 +121,7 @@ class Building {
     //println("Colliding");
     for (Building b : buildings) {
       //println("not same");
-      if (location != b.location) {
+      if (dna.location != b.dna.location) {
         /*  println("W: " + w);
          println("B.w: " + b.w);*/
          //println("LocX: " + location.x + " LocX+w: " + (location.x+w));
@@ -159,10 +139,10 @@ class Building {
            println("Bigger z");
          }*/
 
-        if (((location.x) > (b.location.x)) && 
-            ((location.x) < ((b.location.x)+(b.w))) && 
-            ((location.z) > (b.location.z)) && 
-            ((location.z) < ((b.location.z)+(b.d)))) {
+        if (((dna.location.x) > (b.dna.location.x)) && 
+            ((dna.location.x) < ((b.dna.location.x)+(b.w))) && 
+            ((dna.location.z) > (b.dna.location.z)) && 
+            ((dna.location.z) < ((b.dna.location.z)+(b.d)))) {
               //println("GAH");
               stoppedX = true;
               stoppedZ = true;
