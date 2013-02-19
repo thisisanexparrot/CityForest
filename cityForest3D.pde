@@ -1,6 +1,6 @@
 float rotation=0;
 int count;
-ArrayList<Building> buildings;
+//ArrayList<Building> buildings;
 int groundX;
 int groundY;
 color blue;
@@ -26,16 +26,16 @@ void setup() {
 
 
 
-  buildings = new ArrayList<Building>();
+  //buildings = new ArrayList<Building>();
 
-  PVector v = new PVector(0, height-20, 0);
-  Building b = new Building(v, 100, 40, 80, 300, true);
+  //PVector v = new PVector(0, height-20, 0);
+  //Building b = new Building(v, 100, 40, 80, 300, true);
 
-  PVector v1 = new PVector(100, height-20, 50);
-  Building b1 = new Building(v1, 100, 40, 80, 300, false);
+  //PVector v1 = new PVector(100, height-20, 50);
+  //Building b1 = new Building(v1, 100, 40, 80, 300, false);
   
-  buildings.add(b);
-  buildings.add(b1);
+  //buildings.add(b);
+  //buildings.add(b1);
 }
 
 void draw() {
@@ -65,15 +65,15 @@ void draw() {
   //box(200);
 
   int numBuilding = 0;
-  for (Building b: buildings) {
+  for (Building b: population.buildings) {
     //println("Building number " + numBuilding);
     numBuilding++;
-    b.isColliding(buildings);
-    b.run(buildings);
+    b.isColliding(population.buildings);
+    b.run(population.buildings);
   }
-  for (int i = 0; i < buildings.size(); i++) {
-    if (buildings.get(i).dead) {
-      buildings.remove(i);
+  for (int i = 0; i < population.buildings.size(); i++) {
+    if (population.buildings.get(i).dead) {
+      population.buildings.remove(i);
     }
   }
 }

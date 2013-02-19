@@ -177,7 +177,6 @@ class Building {
          println("Stopped z");
          }*/
       }
-      println();
     }
   }
 }
