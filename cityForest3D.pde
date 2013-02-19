@@ -22,20 +22,7 @@ void setup() {
   breedingAge = 40;
   breedingFreq = 10;
 
-  population = new Population(mutationRate, initPopulation, blue);
-
-
-
-  //buildings = new ArrayList<Building>();
-
-  //PVector v = new PVector(0, height-20, 0);
-  //Building b = new Building(v, 100, 40, 80, 300, true);
-
-  //PVector v1 = new PVector(100, height-20, 50);
-  //Building b1 = new Building(v1, 100, 40, 80, 300, false);
-  
-  //buildings.add(b);
-  //buildings.add(b1);
+  population = new Population(mutationRate, initPopulation, blue, groundX, groundY);
 }
 
 void draw() {
@@ -61,13 +48,7 @@ void draw() {
   box(groundX, 20, groundY);
   popMatrix();
 
-  //fill(255);
-  //box(200);
-
-  int numBuilding = 0;
   for (Building b: population.buildings) {
-    //println("Building number " + numBuilding);
-    numBuilding++;
     b.isColliding(population.buildings);
     b.run(population.buildings);
   }

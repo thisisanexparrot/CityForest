@@ -5,13 +5,18 @@ class Population {
   ArrayList<Building> buildings;
   ArrayList<Building> darwin;
   int generations;
+  int xConstrain;
+  int yConstrain;
+  int spread; 
  
   int order;
   color c1;
  
-  Population(float m, int num, color c1_) {
-    println("Hello");
+  Population(float m, int num, color c1_, int xConstrain_, int yConstrain_) {
     c1 = c1_;
+    xConstrain = xConstrain_;
+    yConstrain = yConstrain_;
+    int = 400;
     
     mutationRate = m;
     buildings = new ArrayList<Building>();
@@ -19,7 +24,10 @@ class Population {
     generations = 0;
     
     for(int i = 0; i < num; i++) {
-      PVector location = new PVector(0, height-20, 0);
+      int beginX = random();
+      int beginZ = random();
+      PVector location = new PVector(beginX, height-20, beginZ);
+      
       ExtrudeShape e = new ExtrudeShape(c1);
       DNA dna = new DNA(e);
       e.addVertex(0, 0);
@@ -32,7 +40,6 @@ class Population {
       Building b = new Building(location, dna, nls);
       buildings.add(b);
       
-      //Building b = Building(location, w, int h_, int d_, int nls, boolean col)
     }
   }
   

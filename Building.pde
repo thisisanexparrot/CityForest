@@ -27,8 +27,10 @@ class Building {
     location = location_; 
     dna = dna_;
     naturalLifeSpan = nls;
+    
+    heightCap = 800;
   }
-
+/*
   Building(PVector location_, int w_, int h_, int d_, int nls, boolean col) {
     location = location_;
     w = w_;
@@ -42,8 +44,7 @@ class Building {
       c = color(#3648D6); 
     }
     
-    
-
+   
     
     ExtrudeShape e = new ExtrudeShape(c);
     e.addVertex(0, 0);
@@ -59,6 +60,7 @@ class Building {
     deathChance = 0;
     naturalLifeSpan = nls;
   }
+  */
 
   void update() {
     pushMatrix();
