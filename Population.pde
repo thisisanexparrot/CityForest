@@ -39,10 +39,7 @@ class Population {
       int beginZ = int(random(-spread, spread));
       PVector location = new PVector(beginX, height-20, beginZ);
 
-
-
       ExtrudeShape e = new ExtrudeShape(c1);
-
 
       int numVertex = 4;
       int random1 = int(random(30, 100));
@@ -68,6 +65,16 @@ class Population {
       Building b = new Building(dna);
       buildings.add(b);
     }
+  }
+  
+  int getMaxHeight() {
+    int curMax = 0;
+    for(int i = 0; i < buildings.size(); i++) {
+      if(buildings.get(i).h > curMax) {
+        curMax = buildings.get(i).h;
+      } 
+    }
+    return curMax;
   }
 
   void live() {

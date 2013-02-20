@@ -2,6 +2,7 @@
  *  http://en.wikipedia.org/wiki/Brahmagupta's_formula
  *  http://forum.processing.org/topic/rotating-a-camera-around-global-axis
  */
+PFont boldFont;
 
 float rotation=0;
 int count;
@@ -17,8 +18,12 @@ float mutationRate = 0.05;
 int breedingAge;
 int breedingFreq; 
 int numBreedingYears;
+int numberYears;
+int generations;
 
 void setup() {
+  boldFont = loadFont("PlayfairDisplaySC-Bold-48.vlw");
+  
   //smooth();
   size(850, 850, P3D);
   groundX = 5000;
@@ -28,6 +33,7 @@ void setup() {
   breedingAge = 80;
   breedingFreq = 40;
   numBreedingYears = 0;
+  generations = 0;
 
   population = new Population(mutationRate, 
                               initPopulation, 
@@ -46,14 +52,31 @@ void draw() {
     population.naturalSelection();
     population.generate();
     numBreedingYears = 0;
+    generations++;
   }
   numBreedingYears++;
+  numberYears++;
+}
+
+void printText() {
+  pushMatrix();
+  translate(-2300, -1500, 0);
+  textFont(boldFont);
+  textSize(300);
+  fill(255);
+  text("City Forest", 30, 30);
+  textSize(160);
+  text("Time passed: " + numberYears, 60, 230);
+  text("Generations: " + generations, 60, 400);
+  text("Max height: " + population.getMaxHeight(), 60, 570);
+  popMatrix();
 }
 
 void backgroundAndCamera() {
-  background(#A6A6A6);
 
-  float orbitRadius= 3500 + mouseY*3;
+  background(200);
+
+  float orbitRadius= 2500 + mouseY*3;
   float ypos= -1000;
   float xpos= cos(radians(rotation))*orbitRadius;
   float zpos= sin(radians(rotation))*orbitRadius;
@@ -84,9 +107,9 @@ void backgroundAndCamera() {
 
   line(-groundX/2+offset, 0, groundY/2-offset, -groundX/2+offset, 0, -groundY/2-offset);
 
-
   //line(30, 20, 30, groundX-30, 20, groundY-30);
-
   
   popMatrix();  
+  printText();
+
 }
