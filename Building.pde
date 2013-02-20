@@ -58,9 +58,27 @@ class Building {
     return false;
   }
 
+  //Brahmagupta's Formula 
+  int calcVolume() {
+    ExtrudeShape base = dna.e;
+    Vertex v1 = base.vertices2D.get(0);
+    Vertex v2 = base.vertices2D.get(1);
+    Vertex v3 = base.vertices2D.get(2);
+    Vertex v4 = base.vertices2D.get(3);
+    
+    float a = sqrt(sq(v1.x-v2.x)+sq(v1.z-v2.z));
+    float b = sqrt(sq(v2.x-v3.x)+sq(v2.z-v3.z));
+    float c = sqrt(sq(v3.x-v4.x)+sq(v3.z-v4.z));
+    float d = sqrt(sq(v4.x-v1.x)+sq(v4.z-v1.z));
+    float s = (a + b + c + d) / 2;
+    int baseArea = int(sqrt((s-a)*(s-b)*(s-c)*(s-d)));
+    int volume = baseArea * (-1 * h);
+    return volume;
+  }
   
   void calcFitness() {
-    fitness = random(0, 20);
+    int volume = calcVolume();
+    fitness = volume;
     //calculate from  
   }
 
@@ -94,11 +112,11 @@ class Building {
   }
   
   
-   void growOutX() {
-     if (w <= maxWidth && !stoppedX) {
-       w++;
-     }
-   }
+  void growOutX() {
+    if (w <= maxWidth && !stoppedX) {
+      w++;
+    }
+  }
 
   void growOutZ() {
     if (d <= maxDepth && !stoppedZ) {

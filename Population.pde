@@ -54,7 +54,7 @@ class Population {
       //add vertexes
       int nls = int(random(30, 200));
       int growthRate = int(random(-2, 7));
-      int heightCap = int(random(400, 700));
+      int heightCap = int(random(100, 200));
       int seedSpread = int(random(500, 800));
 
       DNA dna = new DNA(e, 
@@ -100,7 +100,8 @@ class Population {
     
     for (int i = 0; i < buildings.size(); i++) {
       float fitnessNormal = buildings.get(i).fitness / totalFitness;
-      int n = (int) (fitnessNormal * 50000);  // Arbitrary multiplier, consider mapping fix
+      int n = int(fitnessNormal * 800);
+      //int n = (int) (fitnessNormal * 50000);  // Arbitrary multiplier, consider mapping fix
       for (int j = 0; j < n; j++) {
         darwin.add(buildings.get(i));
       }

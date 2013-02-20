@@ -1,3 +1,8 @@
+/* Acknowledgements: 
+ *  http://en.wikipedia.org/wiki/Brahmagupta's_formula
+ *  http://forum.processing.org/topic/rotating-a-camera-around-global-axis
+ */
+
 float rotation=0;
 int count;
 //ArrayList<Building> buildings;
@@ -49,7 +54,7 @@ void backgroundAndCamera() {
   background(#A6A6A6);
 
   float orbitRadius= 4000+50;
-  float ypos= -300;
+  float ypos= -1000;
   float xpos= cos(radians(rotation))*orbitRadius;
   float zpos= sin(radians(rotation))*orbitRadius;
 
