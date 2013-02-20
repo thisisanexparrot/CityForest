@@ -54,7 +54,8 @@ class Population {
       //add vertexes
       int nls = int(random(30, 200));
       int growthRate = int(random(-2, 7));
-      int heightCap = int(random(100, 200));
+      int heightCap = int(random(200, 1000));
+      //int heightCap = int(random(100, 200));
       int seedSpread = int(random(500, 800));
 
       DNA dna = new DNA(e, 

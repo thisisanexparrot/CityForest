@@ -53,7 +53,7 @@ void draw() {
 void backgroundAndCamera() {
   background(#A6A6A6);
 
-  float orbitRadius= 4000+50;
+  float orbitRadius= 3500 + mouseY*3;
   float ypos= -1000;
   float xpos= cos(radians(rotation))*orbitRadius;
   float zpos= sin(radians(rotation))*orbitRadius;
@@ -71,5 +71,22 @@ void backgroundAndCamera() {
   noStroke();
   fill(blue);
   box(groundX, 20, groundY);
+  
+  stroke(255);
+  strokeWeight(100);
+  int offset = 80;
+
+  line(groundX/2+offset, 0, groundY/2-offset, -groundX/2+offset, 0, groundY/2-offset);
+
+  line(groundX/2-offset, 0, -groundY/2+offset, -groundX/2-offset, 0, -groundY/2+offset);
+
+  line(groundX/2-offset, 0, -groundY/2-offset, groundX/2-offset, 0, groundY/2-offset);
+
+  line(-groundX/2+offset, 0, groundY/2-offset, -groundX/2+offset, 0, -groundY/2-offset);
+
+
+  //line(30, 20, 30, groundX-30, 20, groundY-30);
+
+  
   popMatrix();  
 }

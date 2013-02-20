@@ -52,7 +52,6 @@ class DNA {
   void mutate(float m) {  
     if(random(1) < m) {
       heightCap = heightCap + int(random(-40, 40));
-      println("RAND");
     }
     if(random(1) < m) {
       growthRate = growthRate + int(random(-3, 3)); 
